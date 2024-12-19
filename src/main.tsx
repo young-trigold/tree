@@ -50,7 +50,7 @@ const Tree: FunctionComponent<TreeConfig> = (props) => {
         random,
     } = props;
 
-    const intricCanvasSize = { width: innerWidth * devicePixelRatio, height: innerHeight * devicePixelRatio };
+    const intrinsicCanvasSize = { width: innerWidth * devicePixelRatio, height: innerHeight * devicePixelRatio };
 
     const canvasStyle: CSSProperties = {
         display: 'block',
@@ -148,12 +148,12 @@ const Tree: FunctionComponent<TreeConfig> = (props) => {
                 }
                 const leftAngle = (curAngle + angleDelta * (random ? gaussianRandom() : 1));
                 const rightAngle = (curAngle - angleDelta * (random ? gaussianRandom() : 1));
-                const nextlength = curLength * (1 - branchLengthDecreaseRatio);
+                const nextLength = curLength * (1 - branchLengthDecreaseRatio);
                 const nextThickness = curThickness * (1 - branchThicknessDecreaseRatio);
-                const left = drawBranch(curPoint, leftAngle, nextlength, nextThickness, branchColor);
-                const right = drawBranch(curPoint, rightAngle, nextlength, nextThickness, branchColor);
-                window.requestAnimationFrame(() => drawTree(left, leftAngle, nextlength, nextThickness));
-                window.requestAnimationFrame(() => drawTree(right, rightAngle, nextlength, nextThickness));
+                const left = drawBranch(curPoint, leftAngle, nextLength, nextThickness, branchColor);
+                const right = drawBranch(curPoint, rightAngle, nextLength, nextThickness, branchColor);
+                window.requestAnimationFrame(() => drawTree(left, leftAngle, nextLength, nextThickness));
+                window.requestAnimationFrame(() => drawTree(right, rightAngle, nextLength, nextThickness));
             };
 
             drawTree(endPoint, Math.PI / 2, mainBranchHeight * 0.37, mainBranchThickness);
@@ -188,7 +188,7 @@ const Tree: FunctionComponent<TreeConfig> = (props) => {
     ]);
 
     return (
-        <canvas ref={canvasRef} width={intricCanvasSize.width} height={intricCanvasSize.height} style={canvasStyle}></canvas>
+        <canvas ref={canvasRef} width={intrinsicCanvasSize.width} height={intrinsicCanvasSize.height} style={canvasStyle}></canvas>
     );
 };
 
